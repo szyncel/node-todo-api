@@ -46,7 +46,7 @@ app.get('/todos/:id', (req, res) => {
 
     if (!ObjectID.isValid(id)) {
         return res.status(404).send({
-            info:"invalidId"
+            // info:"invalidId"
         });
     }
 
@@ -54,7 +54,8 @@ app.get('/todos/:id', (req, res) => {
         if (!todo) {
             return res.status(404).send({});
         }
-        res.status(200).send(todo);
+        res.status(200).send({todo});
+        // console.log({todo});
     }).catch((e) => {
         res.status(400).send({});
     });
