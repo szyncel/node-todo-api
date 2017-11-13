@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/TodoApp', {
+mongoose.connect(process.env.MONGODB_URI, {
     useMongoClient: true
 });
 mongoose.Promise = global.Promise;
@@ -9,4 +9,4 @@ module.exports = {
 };
 
 //mongodb://localhost/TodoApp
-//'mongodb://szyncel:szynka123@ds257245.mlab.com:57245/szyncel-todo-test' ||
+//'mongodb://szyncel:szynka123@ds257245.mlab.com:57245/szyncel-todo-test'

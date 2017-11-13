@@ -1,3 +1,6 @@
+require('./config/config');
+
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
@@ -16,7 +19,7 @@ var Todo = require('./models/todo').Todo;
 
 
 var app = express()
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 
 app.use(bodyParser.json());
 
