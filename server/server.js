@@ -95,7 +95,7 @@ app.patch('/todos/:id', (req, res) => {
     //get Id
     var id = req.params.id;
     var body = _.pick(req.body, ['text', 'completed']);
-    console.log(req);
+    // console.log(req);
     if (!ObjectID.isValid(id)) {
         return res.status(404).send({
             info: "invalidId"
