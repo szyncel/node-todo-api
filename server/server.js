@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
+var {authenticate} = require('./middleware/authenticate');
 
 const {
     ObjectID
@@ -138,23 +139,18 @@ app.post('/users', (req, res) => {
 
     user.save().then(() => {
         return user.generateAuthToken();
-      }).then((token) => {
+    }).then((token) => {
         res.header('x-auth', token).send(user);
-      }).catch((e) => {
+    }).catch((e) => {
         res.status(400).send(e);
-      })
+    })
 })
 
 
-// var todo = new Todo({
-//     text: req.body.text
-// });
-// // console.log(todo);
-// todo.save().then((doc) => {
-//     res.send(doc);
-// }, (e) => {
-//     res.status(400).send(e);
-// });
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
+});
 
 
 
