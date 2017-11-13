@@ -1,5 +1,7 @@
 require('./config/config');
 
+var CryptoJS = require("crypto-js");
+var jwt = require('jsonwebtoken');
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -129,6 +131,30 @@ app.patch('/todos/:id', (req, res) => {
     })
 
 })
+
+app.post('/users', (req, res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+    var user = new User(body);
+
+    user.save().then(() => {
+        return user.generateAuthToken();
+      }).then((token) => {
+        res.header('x-auth', token).send(user);
+      }).catch((e) => {
+        res.status(400).send(e);
+      })
+})
+
+
+// var todo = new Todo({
+//     text: req.body.text
+// });
+// // console.log(todo);
+// todo.save().then((doc) => {
+//     res.send(doc);
+// }, (e) => {
+//     res.status(400).send(e);
+// });
 
 
 
