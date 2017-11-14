@@ -6,7 +6,9 @@ var jwt = require('jsonwebtoken');
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
-var {authenticate} = require('./middleware/authenticate');
+var {
+    authenticate
+} = require('./middleware/authenticate');
 
 
 const {
@@ -136,14 +138,7 @@ app.patch('/todos/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
-    // console.log(body);
-    // bcrypt.genSalt(10, function(err, salt) {
-    //     bcrypt.hash(body.password, salt, function(err, hash) {
-    //         var hashedPass=hash;               
-    //     });
-    // });
     var user = new User(body);
-    // user.password=hashedPass;
 
     user.save().then(() => {
         return user.generateAuthToken();
