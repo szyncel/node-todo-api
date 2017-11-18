@@ -169,6 +169,14 @@ app.get('/users/me', authenticate, (req, res) => {
     res.send(req.user);
 });
 
+app.delete('/users/me/token',authenticate,(req,res) => {
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send();
+    },() => {
+       res.status(400).send(); 
+    });
+});
+
 
 
 app.listen(port, () => {
@@ -178,8 +186,3 @@ app.listen(port, () => {
 module.exports = {
     app
 };
-
-
-// app.get('/', function (req, res) {
-//     res.send('GET request to the homepage')
-//   })
