@@ -17,6 +17,10 @@ var todoSchema = mongoose.Schema({
         default: null
 
 
+    },
+    _creator:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
     }
 });
 

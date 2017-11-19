@@ -9,15 +9,7 @@ const {
 } = require('./../../models/user');
 const jwt = require('jsonwebtoken');
 
-const todos = [{
-    _id: new ObjectID(),
-    text: "first Todo"
-}, {
-    _id: new ObjectID(),
-    text: "Second Todo",
-    completed: true,
-    completedAt: 333
-}];
+
 
 const populateTodos = (done) => {
     Todo.remove({}).then(() => {
@@ -56,6 +48,18 @@ const users = [{
 
     }
 ];
+
+const todos = [{
+    _id: new ObjectID(),
+    text: "first Todo",
+    _creator: userOneId
+}, {
+    _id: new ObjectID(),
+    text: "Second Todo",
+    completed: true,
+    completedAt: 333,
+    _creator: userTwoId
+}];
 
 const populateUsers = (done) => {
     User.remove({}).then(() => {
